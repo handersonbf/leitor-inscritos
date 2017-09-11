@@ -7,7 +7,7 @@ public class BlusaFemininaG implements Blusa {
 	}
 	@Override
 	public String toString() {
-		return "<font color='#FF00FF'><strong>SEM CAMISA</strong></font>";
+		return "<font color='#FF00FF'><strong>G-Feminina</strong></font>";
 	}
 	
 	public static Integer getTotal() {

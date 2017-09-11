@@ -21,6 +21,7 @@ public class TestandoArquivo {
 	private static final String CLASSE_MASCULINA_G = "MasculinaG";
 	private static final String CLASSE_MASCULINA_P = "MasculinaP";
 	private static final String TAMANHO_BLUSA_MASCULINA = "Masculina P";
+	private static final String REGEX_TAMANHO_BLUSA = Configuracoes.REGEX_MASCULINO;
 	private static String LINHA_TEXTO_CSV = "";
 	private static String[] TEXTO_DO_ARQUIVO_SEPARADO = null;
 	private static final int POSICAO_BLUSA = Configuracoes.POSICAO_BLUSA;
@@ -36,9 +37,10 @@ public class TestandoArquivo {
 	}
 
 	@Test
-	public void testaColunaTamanhoDaBlusa(){
-		String string = TEXTO_DO_ARQUIVO_SEPARADO[POSICAO_BLUSA];
-		assertEquals("A posicao da coluna do tamanho da blusa está errada", TAMANHO_BLUSA_MASCULINA, string);
+	public void testaColunaSePegouOTamanhoDaBlusa(){
+		String tamanhoBlusa = TEXTO_DO_ARQUIVO_SEPARADO[POSICAO_BLUSA];
+		boolean matches = tamanhoBlusa.matches(REGEX_TAMANHO_BLUSA);
+		Assert.assertEquals("Não pegou a coluna certa", true,  matches);
 	}
 	
 	@Test
@@ -51,8 +53,8 @@ public class TestandoArquivo {
 	public void validaSeTemCamisa(){
 		html.setTextoDoArquivoSeparado(TEXTO_DO_ARQUIVO_SEPARADO);
 		String validaSeTemCamisa = this.html.validaSeTemCamisa(POSICAO_BLUSA);
-		Assert.assertEquals("", TAMANHO_BLUSA_MASCULINA, validaSeTemCamisa);
-		
+		boolean matches = validaSeTemCamisa.matches(REGEX_TAMANHO_BLUSA);
+		Assert.assertEquals("Não pegou a coluna certa", true,  matches);
 	}
 	
 	@Test

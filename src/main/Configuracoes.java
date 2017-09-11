@@ -13,4 +13,6 @@ public abstract class Configuracoes {
 	public static final int COLUNA_SOBRE_NOME = 3;
 	public static final int COLUNA_NOME_TICKET = 6;
 	public static final String NOME_CLASSE_SEM_BLUSA = "SEMBlusa";
+	public static final String REGEX_MASCULINO = "[M][a][s][c][u][l][i][n][a-z]\\s[A-Z]";
+	public static final String REGEX_FEMININO = "[F][e][m][i][n][i][n][a-z]\\s[A-Z]";
 }
