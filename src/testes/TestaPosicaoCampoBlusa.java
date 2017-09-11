@@ -1,15 +1,9 @@
 package testes;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 import main.Configuracoes;
-import main.HTMLSource;
 import main.Leitor;
 
 public class TestaPosicaoCampoBlusa {
