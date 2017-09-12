@@ -13,38 +13,22 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-public class Leitor {
+public class ProcessadorDeInscritos {
 
 	private static final int POSICAO_BLUSA = Configuracoes.POSICAO_BLUSA;
 	private static HTMLSource html = new HTMLSource();
 
-	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public static void inicializaLeitor() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
 		
-		BufferedReader br = null;
+		BufferedReader arquivoCSV = null;
 
 		try {
-			br = carregaArquivo();
-			String textoDoArquivo = br.readLine();
-			
-			int cont = 0;
-			while (textoDoArquivo != null) {
-				String[] textoDoArquivoSeparado = textoDoArquivo.split(Configuracoes.SPLIT);
-				String tamanho = pegaTamanhoBlusaPelaPosicao(textoDoArquivoSeparado);
-				
-				cont = gerarDados(cont, html, textoDoArquivoSeparado, tamanho);
-				textoDoArquivo = br.readLine();
-			}
+			arquivoCSV = carregaArquivo();
+			processandoArquivo(arquivoCSV);
 
-			OutputStream os = new FileOutputStream("inscritos.html", false);
-			OutputStreamWriter osw = new OutputStreamWriter(os,Charset.forName("ISO-8859-15"));
-			BufferedWriter bw = new BufferedWriter(osw);
-			bw.newLine();
-			bw.write(html.geraHTML());
-			bw.write(html.totalBlusas());
+			gravandoHTML();
 			
 			System.out.println(html.totalBlusas());
-			
-			bw.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("N�o foi poss�vel encontrar o arquivo.");
 			e.printStackTrace();
@@ -56,11 +40,43 @@ public class Leitor {
 			e.printStackTrace();
 		} finally {
 			try {
-				br.close();
+				arquivoCSV.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private static void gravandoHTML() throws FileNotFoundException, IOException {
+		OutputStream os = new FileOutputStream("inscritos.html", false);
+		OutputStreamWriter osw = new OutputStreamWriter(os,Charset.forName("ISO-8859-15"));
+		BufferedWriter bw = new BufferedWriter(osw);
+		bw.newLine();
+		bw.write(html.geraHTML());
+		bw.write(html.totalBlusas());
+		
+		bw.close();
+	}
+
+	public static void processandoArquivo(BufferedReader arquivoCSV)
+			throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		
+		String linhaDoTextoDoCSV = arquivoCSV.readLine();
+	
+		processamentoDaLinhaCSV(arquivoCSV, linhaDoTextoDoCSV);
+	}
+
+	public static void processamentoDaLinhaCSV(BufferedReader arquivoCSV, String linhaDoTextoDoCSV)
+			throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
+		
+		for (int contadorDoFor = 0; linhaDoTextoDoCSV != null; contadorDoFor++) {
+			String[] textoDoArquivoSeparado = linhaDoTextoDoCSV.split(Configuracoes.SPLIT);
+			String tamanho = pegaTamanhoBlusaPelaPosicao(textoDoArquivoSeparado);
+			
+			gerarDados(contadorDoFor, html, textoDoArquivoSeparado, tamanho);
+			linhaDoTextoDoCSV = arquivoCSV.readLine();
+		}
+		
 	}
 	
 	public static BufferedReader carregaArquivo() throws IOException{
@@ -81,13 +97,11 @@ public class Leitor {
 		return tamanho;
 	}
 
-	private static int gerarDados(int cont, HTMLSource html, String[] textoDoArquivoSeparado, String tamanho)
+	private static void gerarDados(int cont, HTMLSource html, String[] textoDoArquivoSeparado, String tamanho)
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		if(tamanho != null && !tamanho.isEmpty()){
 			html.gerarDados(new Integer(cont), textoDoArquivoSeparado, POSICAO_BLUSA);
-			cont++;
 		}
-		return cont;
 	}
 	
 	

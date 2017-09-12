@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import main.Configuracoes;
-import main.Leitor;
+import main.ProcessadorDeInscritos;
 
 public class TestaColunasDados {
 
@@ -38,7 +38,7 @@ public class TestaColunasDados {
 	
 	@Test
 	public void testaPegaTamanhoDaBlusa(){
-		String pegaTamanhoBlusaPelaPosicao = Leitor.pegaTamanhoBlusaPelaPosicao(TEXTO_DO_ARQUIVO_SEPARADO);
+		String pegaTamanhoBlusaPelaPosicao = ProcessadorDeInscritos.pegaTamanhoBlusaPelaPosicao(TEXTO_DO_ARQUIVO_SEPARADO);
 		Assert.assertEquals("", MASCULINA_M, pegaTamanhoBlusaPelaPosicao);
 	}
 	

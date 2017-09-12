@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import main.Configuracoes;
 import main.HTMLSource;
-import main.Leitor;
+import main.ProcessadorDeInscritos;
 
 public class TestandoArquivo {
 
@@ -27,7 +27,7 @@ public class TestandoArquivo {
 
 	@Before
 	public void init() throws IOException{
-		BR = Leitor.carregaArquivo();
+		BR = ProcessadorDeInscritos.carregaArquivo();
 		LINHA_TEXTO_CSV = BR.readLine();
 		TEXTO_DO_ARQUIVO_SEPARADO = LINHA_TEXTO_CSV.split(Configuracoes.SPLIT);
 		this.html = new HTMLSource();
@@ -42,7 +42,7 @@ public class TestandoArquivo {
 	
 	@Test
 	public void testaPegaTamanhoDaBlusa(){
-		String pegaTamanhoBlusaPelaPosicao = Leitor.pegaTamanhoBlusaPelaPosicao(TEXTO_DO_ARQUIVO_SEPARADO);
+		String pegaTamanhoBlusaPelaPosicao = ProcessadorDeInscritos.pegaTamanhoBlusaPelaPosicao(TEXTO_DO_ARQUIVO_SEPARADO);
 		Assert.assertEquals("", TAMANHO_BLUSA_MASCULINA, pegaTamanhoBlusaPelaPosicao);
 	}
 	
