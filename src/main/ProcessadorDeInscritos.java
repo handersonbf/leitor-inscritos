@@ -97,7 +97,7 @@ public class ProcessadorDeInscritos {
 		return tamanho;
 	}
 
-	private static void gerarDados(int cont, HTMLSource html, String[] textoDoArquivoSeparado, String tamanho)
+	public static void gerarDados(int cont, HTMLSource html, String[] textoDoArquivoSeparado, String tamanho)
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		if(tamanho != null && !tamanho.isEmpty()){
 			html.gerarDados(new Integer(cont), textoDoArquivoSeparado, POSICAO_BLUSA);

@@ -44,8 +44,6 @@ public class HTMLSource {
 		}
 	}
 	
-//	.append("<font color='#FF00FF'><strong>").append(nome).append("</strong></font>").append("</td>");
-	
 	public String validaSeTemCamisa(int posicaoArray){
 		String tamanhoCamisa= Configuracoes.NOME_CLASSE_SEM_BLUSA;
 		if(!isSEMCamisa()){
