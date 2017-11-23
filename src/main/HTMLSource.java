@@ -14,7 +14,7 @@ public class HTMLSource {
 	private StringBuilder stringsHTML = new StringBuilder();
 	private StringBuilder totalBlusas = new StringBuilder();
 	private Integer BLUSA_TOTAL = 0;
-	private List<String> semNomes = new ArrayList<>();
+	private List<String> listaDeParticipantesSemNome = new ArrayList<>();
 	private String[] textoDoArquivoSeparado;
 	
 	public void setTextoDoArquivoSeparado(String[] textoDoArquivoSeparado) {
@@ -115,7 +115,7 @@ public class HTMLSource {
 	}
 	
 	public String geraHTMLSemNomes(){
-		return this.semNomes.toString();
+		return this.listaDeParticipantesSemNome.toString();
 	}
 	
 	public String getNome(){
@@ -165,6 +165,6 @@ public class HTMLSource {
 	}
 	
 	public List<String> getSemNomes(){
-		return this.semNomes;
+		return this.listaDeParticipantesSemNome;
 	}
 }

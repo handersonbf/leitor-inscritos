@@ -16,7 +16,7 @@ import java.nio.charset.Charset;
 public class ProcessadorDeInscritos {
 
 	private static final int POSICAO_BLUSA = Configuracoes.POSICAO_BLUSA;
-	private static HTMLSource html = new HTMLSource();
+	private static HTMLSource gerarPaginaHTML = new HTMLSource();
 
 	public static void inicializaLeitor() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
 		
@@ -28,7 +28,7 @@ public class ProcessadorDeInscritos {
 
 			gravandoHTML();
 			
-			System.out.println(html.totalBlusas());
+			System.out.println(gerarPaginaHTML.totalBlusas());
 		} catch (FileNotFoundException e) {
 			System.out.println("N�o foi poss�vel encontrar o arquivo.");
 			e.printStackTrace();
@@ -52,8 +52,8 @@ public class ProcessadorDeInscritos {
 		OutputStreamWriter osw = new OutputStreamWriter(os,Charset.forName("ISO-8859-15"));
 		BufferedWriter bw = new BufferedWriter(osw);
 		bw.newLine();
-		bw.write(html.geraHTML());
-		bw.write(html.totalBlusas());
+		bw.write(gerarPaginaHTML.geraHTML());
+		bw.write(gerarPaginaHTML.totalBlusas());
 		
 		bw.close();
 	}
@@ -73,7 +73,7 @@ public class ProcessadorDeInscritos {
 			String[] textoDoArquivoSeparado = linhaDoTextoDoCSV.split(Configuracoes.SPLIT);
 			String tamanho = pegaTamanhoBlusaPelaPosicao(textoDoArquivoSeparado);
 			
-			gerarDados(contadorDoFor, html, textoDoArquivoSeparado, tamanho);
+			gerarDados(contadorDoFor, gerarPaginaHTML, textoDoArquivoSeparado, tamanho);
 			linhaDoTextoDoCSV = arquivoCSV.readLine();
 		}
 		

@@ -56,8 +56,11 @@ public class TestandoArquivo {
 	
 	@Test
 	public void validaSeTemCamisaEQualEh(){
+		System.out.println(TEXTO_DO_ARQUIVO_SEPARADO[20]);
 		html.setTextoDoArquivoSeparado(TEXTO_DO_ARQUIVO_SEPARADO);
+		System.out.println(this.html.validaSeTemCamisa(POSICAO_BLUSA));
 		String validaSeTemCamisa = this.html.validaSeTemCamisa(POSICAO_BLUSA);
+		System.out.println(this.html.validaSeTemCamisa(POSICAO_BLUSA));
 		Assert.assertEquals("Era esperado M", TAMANHO_BLUSA_MASCULINA, validaSeTemCamisa);
 		
 	}
